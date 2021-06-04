@@ -3,6 +3,7 @@ import { SchemaTypes, FiledPropsDefine } from './types'
 import StringField from './fileds/StringField'
 import NumberField from './fileds/NumberFiled'
 import ObjectField from './fileds/ObjectField'
+import ArrayField from './fileds/ArrayField'
 import {retrieveSchema} from './utils' // 处理schema
 
 export default defineComponent({
@@ -40,6 +41,10 @@ export default defineComponent({
         }
         case SchemaTypes.OBJECT: {
           Component = ObjectField
+          break
+        }
+        case SchemaTypes.ARRAY: {
+          Component = ArrayField
           break
         }
         default: {
