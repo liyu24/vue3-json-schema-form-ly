@@ -1,34 +1,34 @@
-import { defineComponent, PropType, watchEffect } from 'vue'
+import { defineComponent, provide } from 'vue'
 
-import { Schema, SchemaTypes } from './types'
+import { FiledPropsDefine } from './types'
 
 import SchemaItem from './SchemaItem'
+import {  SchemaFormContextKey  } from './context'
 
 // 组件库入口
 export default defineComponent({
-  props: {
-    schema: {
-      type: Object as PropType<Schema>,
-      required: true,
-    },
-    value: {
-      required: true,
-    },
-    onChange: {
-      type: Function as PropType<(v: any) => void>,
-      required: true,
-    },
-  },
+  props: FiledPropsDefine,
   name: 'SchemaForm',
   setup(props, { slots, emit, attrs }) {
     const handleChange = (v: any) => {
       props.onChange(v)
     }
 
+    const context = {
+      SchemaItem,
+    }
+
+    provide(SchemaFormContextKey, context)
+
     return () => {
       const { schema, value } = props
       return (
-        <SchemaItem schema={schema} value={value} onChange={handleChange} />
+        <SchemaItem
+          schema={schema}
+          rootSchema={schema}
+          value={value}
+          onChange={handleChange}
+        />
       )
     }
   },
