@@ -179,6 +179,7 @@ export default defineComponent({
             <div class={classes.form}>
               <SchemaForm
                 schema={demo.schema}
+                rootSchema={demo.schema}
                 onChange={handleChange}
                 value={demo.data}
               />
