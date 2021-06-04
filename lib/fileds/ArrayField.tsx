@@ -2,6 +2,27 @@ import { defineComponent, handleError } from 'vue'
 import { Schema, FiledPropsDefine } from '../types'
 import { useVJSFContext } from '../context'
 
+const ArrayItemWrapper = defineComponent({
+  name: 'ArrayItemWrapper',
+  props: {},
+  setup(props, { slots }) {
+    console.log('slot', slots)
+    return () => {
+      return (
+        <div>
+          <div>
+            <button>新增</button>
+            <button>删除</button>
+            <button>上移</button>
+            <button>下移</button>
+          </div>
+          <div>{slots.default && slots.default()}</div>
+        </div>
+      )
+    }
+  },
+})
+
 export default defineComponent({
   name: 'ArrayField',
   props: FiledPropsDefine,
@@ -22,6 +43,7 @@ export default defineComponent({
       const SchemaItem = context.SchemaItem
 
       const isMultiType = Array.isArray(schema.items)
+      const isSelect = schema.items && (schema.items as any).enum
 
       if (isMultiType) {
         // 处理schema.items 是数组的情况
@@ -36,6 +58,22 @@ export default defineComponent({
             onChange={(v: any) => handleMultiTypeChange(v, index)}
           />
         ))
+      } else if (!isSelect) {
+        const arr = Array.isArray(value) ? value : []
+
+        return arr.map((v: any, index: number) => {
+          return (
+            <ArrayItemWrapper>
+              <SchemaItem
+                schema={schema.items as Schema}
+                value={v}
+                key={index}
+                rootSchema={rootSchema}
+                onChange={(v: any) => handleMultiTypeChange(v, index)}
+              />
+            </ArrayItemWrapper>
+          )
+        })
       }
 
       return <div>hehe</div>
