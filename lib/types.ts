@@ -15,21 +15,35 @@ export interface Schema {
   type: SchemaTypes | string
   const?: any
   format?: string
+
+  title?: string
   default?: any
   properties?: {
-    [key: string]: Schema | { $ref: string }
+    [key: string]: Schema
   }
   items?: Schema | Schema[] | SchemaRef
+  uniqueItems?: any
   dependencies?: {
     [key: string]: string[] | Schema | SchemaRef
   }
   oneOf?: Schema[]
+  anyOf?: Schema[]
+  allOf?: Schema[]
   // vjsf?: VueJsonSchemaConfig
   required?: string[]
   enum?: any[]
+  enumNames?: any[]
   enumKeyValue?: any[]
   additionalProperties?: any
-  addtionalItems?: Schema
+  additionalItems?: Schema
+
+  minLength?: number
+  maxLength?: number
+  minimum?: number
+  maximum?: number
+  multipleOf?: number
+  exclusiveMaximum?: number
+  exclusiveMinimum?: number
 }
 
 // const schema: Schema = {
@@ -37,17 +51,19 @@ export interface Schema {
 // }
 
 export const FiledPropsDefine = {
-  props: {
-    schema: {
-      type: Object as PropType<Schema>,
-      required: true,
-    },
-    value: {
-      required: true,
-    },
-    onChange: {
-      type: Function as PropType<(v: any) => void>,
-      required: true,
-    },
+  schema: {
+    type: Object as PropType<Schema>,
+    required: true,
+  },
+  value: {
+    required: true,
+  },
+  onChange: {
+    type: Function as PropType<(v: any) => void>,
+    required: true,
+  },
+  rootSchema: {
+    type: Object as PropType<Schema>,
+    required: true,
   },
 } as const
