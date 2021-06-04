@@ -1,22 +1,43 @@
 import { defineComponent, handleError } from 'vue'
+import { createUseStyles } from 'vue-jss'
 import { Schema, FiledPropsDefine } from '../types'
 import { useVJSFContext } from '../context'
+
+const useStyles = createUseStyles({
+  container: {
+    border: '1px solid #eee',
+  },
+  actions: {
+    background: '#eee',
+    padding: 10,
+    textAlign: 'right',
+  },
+  action: {
+    '& + &': {
+      marginLeft: 10,
+    },
+  },
+  content: {
+    padding: 10,
+  },
+})
 
 const ArrayItemWrapper = defineComponent({
   name: 'ArrayItemWrapper',
   props: {},
   setup(props, { slots }) {
-    console.log('slot', slots)
+    const classesRef = useStyles()
     return () => {
+      const classes = classesRef.value
       return (
-        <div>
-          <div>
-            <button>新增</button>
-            <button>删除</button>
-            <button>上移</button>
-            <button>下移</button>
+        <div class={classes.container}>
+          <div class={classes.actions}>
+            <button class={classes.action}>新增</button>
+            <button class={classes.action}>删除</button>
+            <button class={classes.action}>上移</button>
+            <button class={classes.action}>下移</button>
           </div>
-          <div>{slots.default && slots.default()}</div>
+          <div class={classes.content}>{slots.default && slots.default()}</div>
         </div>
       )
     }
