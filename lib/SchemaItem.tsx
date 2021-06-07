@@ -1,9 +1,9 @@
 import { defineComponent, computed } from 'vue'
 import { SchemaTypes, FiledPropsDefine } from './types'
-import StringField from './fileds/StringField'
-import NumberField from './fileds/NumberFiled'
-import ObjectField from './fileds/ObjectField'
-import ArrayField from './fileds/ArrayField'
+import StringField from './fields/StringField'
+import NumberField from './fields/NumberFiled'
+import ObjectField from './fields/ObjectField'
+import ArrayField from './fields/ArrayField'
 import {retrieveSchema} from './utils' // 处理schema
 
 export default defineComponent({
@@ -12,10 +12,10 @@ export default defineComponent({
 
   setup(props) {
 
-    const retrievedSchemaRef = computed(() => { // computed return的是一个ref对象
-      console.log('computed')
-      const { schema, rootSchema ,value } = props
-      return  retrieveSchema(schema, rootSchema, value)
+    const retrievedSchemaRef = computed(() => {
+      // computed return的是一个ref对象
+      const { schema, rootSchema, value } = props
+      return retrieveSchema(schema, rootSchema, value)
       // retrieveSchema 变动频率不高，所以放在render函数中很浪费，所以适合放在computed里，当props发生变化时，computed会重新渲染
     })
 

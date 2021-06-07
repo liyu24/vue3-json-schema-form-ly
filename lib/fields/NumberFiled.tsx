@@ -16,7 +16,7 @@ export default defineComponent({
     }
     return () => {
       const { value } = props
-      return <input type="number" v-model={value} onChange={handleChange} />
+      return <input type="number" value={value as any} onInput={handleChange} />
     }
   },
 })

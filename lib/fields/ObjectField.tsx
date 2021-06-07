@@ -14,8 +14,6 @@ export default defineComponent({
     const context = useVJSFContext()
 
     const handleObjectFieldChange = (key: string, v: string) => {
-      console.log(props)
-      console.log(key, v)
       const value: any = isObject(props.value) ? props.value : {} // 不是对象的话建立空对象
       if (v === undefined) {
         delete value[key]
