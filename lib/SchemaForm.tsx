@@ -7,12 +7,7 @@ import { SchemaFormContextKey } from './context'
 
 // 组件库入口
 export default defineComponent({
-  props: {...FiledPropsDefine,
-    theme: {
-      type: Object as PropType<Theme>,
-      required: true,
-    } 
-  },
+  props: FiledPropsDefine,
   name: 'SchemaForm',
   setup(props, { slots, emit, attrs }) {
     const handleChange = (v: any) => {
@@ -21,7 +16,7 @@ export default defineComponent({
 
     const context = {
       SchemaItem,
-      theme: props.theme
+      // theme: props.theme,
     }
 
     provide(SchemaFormContextKey, context)
