@@ -1,20 +1,10 @@
 // 专门用来做多选的表单组件
-
 import { defineComponent, ref, watch, PropType } from 'vue'
+import {  SelectionWidgetPropsDefine, SelectionWidgetDefine  } from '../types'
 
-export default defineComponent({
+const Selection:SelectionWidgetDefine =  defineComponent({
   name: 'SelectionWidget',
-  props: {
-    value: {},
-    onChange: {
-      type: Function as PropType<(v: any) => void>,
-      required: true,
-    },
-    options: {
-      type: Array as PropType<{ key: string; value: any }[]>,
-      required: true,
-    },
-  },
+  props: SelectionWidgetPropsDefine,
   setup(props) {
     const currentValueRef = ref(props.value)
 
@@ -45,3 +35,5 @@ export default defineComponent({
     }
   },
 })
+
+export default Selection
