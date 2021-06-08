@@ -1,13 +1,18 @@
-import { defineComponent, provide } from 'vue'
+import { defineComponent, provide, PropType } from 'vue'
 
-import { FiledPropsDefine } from './types'
+import { Schema,  Theme, FiledPropsDefine } from './types'
 
 import SchemaItem from './SchemaItem'
-import {  SchemaFormContextKey  } from './context'
+import { SchemaFormContextKey } from './context'
 
 // 组件库入口
 export default defineComponent({
-  props: FiledPropsDefine,
+  props: {...FiledPropsDefine,
+    theme: {
+      type: Object as PropType<Theme>,
+      required: true,
+    } 
+  },
   name: 'SchemaForm',
   setup(props, { slots, emit, attrs }) {
     const handleChange = (v: any) => {
@@ -16,6 +21,7 @@ export default defineComponent({
 
     const context = {
       SchemaItem,
+      theme: props.theme
     }
 
     provide(SchemaFormContextKey, context)
