@@ -91,8 +91,26 @@ describe('ObjectField', () => {
     })
 
     const strField = wrapper.findComponent(StringField)
-
     await strField.props('onChange')(123)
     expect(value.name).toEqual(123)
+  })
+
+  it('when schema.properties not exist', async () => {
+    let value: any = 123
+    const wrapper = mount(JsonSchemaForm, {
+      props: {
+        schema: {
+          type: 'object',
+        },
+        value: value,
+        onChange: (v: any) => {
+          value = v
+        },
+        rootSchema: { type: '' },
+      },
+    })
+
+    const strField = wrapper.findComponent(StringField)
+    expect(strField.exists()).toBeFalsy()
   })
 })
