@@ -7,9 +7,11 @@ import JsonSchemaForm, {
   SelectionWidget,
 } from '../../lib'
 
+import TestComponent from './utils/TestComponent'
+
 describe('ArrayField', () => {
   it('should render multi type', async () => {
-    const wrapper = mount(JsonSchemaForm, {
+    const wrapper = mount(TestComponent, {
       props: {
         schema: {
           type: 'array',
@@ -38,7 +40,7 @@ describe('ArrayField', () => {
   })
 
   it('should render s222', async () => {
-    const wrapper = mount(JsonSchemaForm, {
+    const wrapper = mount(TestComponent, {
       props: {
         schema: {
           type: 'array',
@@ -57,7 +59,7 @@ describe('ArrayField', () => {
   })
 
   it('should render single type', async () => {
-    const wrapper = mount(JsonSchemaForm, {
+    const wrapper = mount(TestComponent, {
       props: {
         schema: {
           type: 'array',
