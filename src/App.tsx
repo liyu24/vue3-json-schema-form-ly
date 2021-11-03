@@ -135,8 +135,6 @@ export default defineComponent({
       const classes = classesRef.value
       const selected = selectedRef.value
       return (
-        // <StyleThemeProvider>
-        // <VJSFThemeProvider theme={theme as any }>
         <div class={classes.container}>
           <div class={classes.menu}>
             <h1>Vue3 JsonSchema Form</h1>
