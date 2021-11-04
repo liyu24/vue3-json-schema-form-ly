@@ -132,6 +132,7 @@ export default defineComponent({
     const handlelUISchemaChange = (v: string) => handleCodeChange('uiSchema', v)
 
     return () => {
+        //test
       const classes = classesRef.value
       const selected = selectedRef.value
       return (
